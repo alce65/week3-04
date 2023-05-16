@@ -1,17 +1,29 @@
 /* eslint-disable no-new */
 import './style.css';
 
-import { setupCounter } from './counter';
-import { homeTemplate } from './home';
-import { page1Template } from './page1';
-import { header } from './header';
-import { footer } from './footer';
+import { setupCounter } from './counter.ts';
+// OLD import { header } from './header.ts';
+// import { footer } from './footer.ts';
+import { homeTemplate } from './home.ts';
+import { page1Template } from './page1.ts';
+import { Header } from './components/header.ts';
+import { Footer } from './components/footer.ts';
+import { Menu } from './components/menu.ts';
+import { MenuOptions } from './types/menu.options.ts';
 
 const rootElement = document.querySelector<HTMLDivElement>('#app')!;
 
 const path = location.pathname;
 
-rootElement.innerHTML = header;
+const menuOptions: MenuOptions = [
+  { url: 'index.html', label: 'Home' },
+  { url: 'page1.html', label: 'Page1' },
+];
+
+// OLD rootElement.innerHTML = header;
+
+new Header('#app');
+new Menu('header', menuOptions);
 
 if (path.includes('index')) {
   // TEMP if (path === '/index.html')
@@ -22,4 +34,6 @@ if (path.includes('index')) {
   rootElement.innerHTML += page1Template;
 }
 
-rootElement.innerHTML += footer();
+// OLD rootElement.innerHTML += footer();
+
+new Footer('#app', 'ISDI Coders');
